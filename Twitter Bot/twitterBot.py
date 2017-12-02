@@ -32,9 +32,33 @@ def requestHistory(date):
     #newHistory = history.text.split("\"")
     #print("On " + month + "/" + day + ", " + newHistory[9] + ".")
 
-    contentRegex = re.search(r'.*content="(.*)"', history.text)
+    code200Regex = re.search(r'.*status code="(\d{3})"', history.text)
 
-    newHistory = "On " + month + "/" + day + ", " + contentRegex.group(1) + "."
-    api.update_status(newHistory + "\nCredit http://www.hiztory.org/")
+    if code200Regex.group(1) == '200':
+        try:
+            contentRegex = re.search(r'.*content="(.*)"', history.text)
+
+            newHistory = "On " + month + "/" + day + ", " + \
+                         contentRegex.group(1) + "."
+
+            api.update_status(newHistory + "\nCredit http://www.hiztory.org/")
+        except tweepy.error.TweepError:
+            #In case this is run more than once a day
+            pass
+    else:
+        api.update_status("@kevin82593 " + code200Regex.group(1))
+
+
+
+def likeTweets():
+    for tweet in tweepy.Cursor(api.search, q="#100DaysOfCode").items():
+        try:
+            if not tweet.favorited:
+                api.create_favorite(tweet.id)
+        #From what I can tell, Twitter's api may not always catch this
+        #We can ignore the error
+        except tweepy.error.TweepError:
+            pass
 
 requestHistory(str(datetime.now().date()))
+likeTweets()
