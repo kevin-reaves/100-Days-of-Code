@@ -6,6 +6,7 @@ http://www.hiztory.org/
 
 import tweepy, requests, re
 from datetime import datetime, timedelta
+from time import sleep
 from credentials import *
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -57,6 +58,8 @@ def likeTweets():
     for tweet in tweepy.Cursor(api.search, q="#100DaysOfCode",
                                since=sinceDate).items():
         try:
+            #Hits rate limit without sleeping
+            sleep(5)
             if not tweet.favorited:
                 api.create_favorite(tweet.id)
         #From what I can tell, Twitter's api may not always catch this
@@ -64,5 +67,5 @@ def likeTweets():
         except Exception as e:
             print(e)
 
-#requestHistory(str(datetime.now().date()))
+requestHistory(str(datetime.now().date()))
 likeTweets()
