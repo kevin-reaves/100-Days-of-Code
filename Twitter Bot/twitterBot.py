@@ -4,7 +4,7 @@ Thanks to Hiztory.org for the free api
 http://www.hiztory.org/
 """
 
-import tweepy, requests
+import tweepy, requests, re
 from datetime import datetime
 from credentials import *
 
@@ -27,8 +27,14 @@ def requestHistory(date):
     url = baseURL + "date/event/" + month + "/" + day + "/api.xml"
 
     history = requests.get(url, verify=False)
-    newHistory = history.text.split("\"")
 
-    print("On " + month + "/" + day + ", " + newHistory[9] + ".")
+    #Version using split and indexing, moving to RE
+    #newHistory = history.text.split("\"")
+    #print("On " + month + "/" + day + ", " + newHistory[9] + ".")
+
+    contentRegex = re.search(r'.*content="(.*)"', history.text)
+
+    newHistory = "On " + month + "/" + day + ", " + contentRegex.group(1) + "."
+    api.update_status(newHistory + "\nCredit http://www.hiztory.org/")
 
 requestHistory(str(datetime.now().date()))
