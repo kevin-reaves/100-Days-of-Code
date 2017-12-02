@@ -5,7 +5,7 @@ http://www.hiztory.org/
 """
 
 import tweepy, requests, re
-from datetime import datetime
+from datetime import datetime, timedelta
 from credentials import *
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -51,14 +51,18 @@ def requestHistory(date):
 
 
 def likeTweets():
-    for tweet in tweepy.Cursor(api.search, q="#100DaysOfCode").items():
+    sinceDate = datetime.now() - timedelta(days=2)
+    sinceDate = sinceDate.date()
+
+    for tweet in tweepy.Cursor(api.search, q="#100DaysOfCode",
+                               since=sinceDate).items():
         try:
             if not tweet.favorited:
                 api.create_favorite(tweet.id)
         #From what I can tell, Twitter's api may not always catch this
         #We can ignore the error
-        except tweepy.error.TweepError:
-            pass
+        except Exception as e:
+            print(e)
 
-requestHistory(str(datetime.now().date()))
+#requestHistory(str(datetime.now().date()))
 likeTweets()
