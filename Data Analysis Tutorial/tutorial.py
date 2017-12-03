@@ -1,7 +1,8 @@
 #I'm following a tutorial from Youtube for 100DaysOfCode
 # https://www.youtube.com/watch?v=Iqjy9UqKKuo
 
-
+"""
+#Video 2
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import style
@@ -28,5 +29,53 @@ df.set_index('Day', inplace=True)
 #print(df.Visitors.tolist())
 
 #Arrays not supported natively, numpy array
-print(np.array(df[['Bounce_Rate', 'Visitors']]))
+#print(np.array(df[['Bounce_Rate', 'Visitors']]))
+"""
 
+
+"""
+#Video 3
+#https://www.quandl.com/data/ZILLOW/C3159_TURNAH-Zillow-Home-Value-Index-City-Turnover-All-Homes-Greenville-AL
+#ZILLOW-C3159_TURNAH.csv
+
+import pandas as pd
+
+df = pd.read_csv('ZILLOW-C3159_TURNAH.csv')
+
+df.set_index('Date', inplace=True)
+
+#outputs with new index to csv
+df.to_csv('newcsv2.csv')
+
+#df = pd.read_csv('newcsv2.csv')
+#here we're back to date not being an index, csv doesn't have an index
+#print(df.head())
+
+#sets date as index when pulled in
+df = pd.read_csv('newcsv2.csv', index_col=0)
+#print(df.head())
+
+#remember, index is not a column
+df.columns = ['Greenville_HPI']
+
+#print(df.head())
+
+#df.to_csv('newcsv3.csv')
+
+#only want data in csv, no headers
+#df.to_csv('newcsv4.csv', header=False)
+
+df = pd.read_csv('newcsv4.csv', names=['Date', 'Greenville_HPI'], index_col=0)
+print(df.head())
+
+#saves to html
+df.to_html('example.html')
+
+
+df = pd.read_csv('newcsv4.csv', names=['Date', 'Greenville_HPI'])
+#print(df.head())
+
+#rename a single column
+df.rename(columns={'Greenville_HPI':'36037_HPI'}, inplace=True)
+print(df.head())
+"""
