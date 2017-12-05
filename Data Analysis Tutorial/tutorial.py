@@ -79,3 +79,114 @@ df = pd.read_csv('newcsv4.csv', names=['Date', 'Greenville_HPI'])
 df.rename(columns={'Greenville_HPI':'36037_HPI'}, inplace=True)
 print(df.head())
 """
+
+
+
+#Video 4
+#Append combines rows of one dataframe into another dataframe
+
+#Concat takes a group of 2+ dataframes and combines the dataframes via
+#the rows of the columns. Good for merging multiples with similar data
+
+#Merge allows for SQL style merging of two dataframes, inner, outer, left, right
+
+#Join is similar to merge, join is better when index does matter
+
+
+
+#import quandl
+#import pandas as pd
+
+#from credentials import *
+
+"""
+#df = quandl.get('FMAC/HPI_AL', authtoken=api_key)
+#print(df.head())
+
+states = pd.read_html('https://en.wikipedia.org/wiki/List_of'
+                      '_states_and_territories_of_the_United_States')
+
+#print(states[0][1])
+
+#prints abbreviations of 50 states
+for abbv in states[0][1][2:]:
+    print("FMAC/HPI_"+str(abbv))
+"""
+#video 5
+
+"""
+df1 = pd.DataFrame({'HPI':[80,85,88,85],
+                    'Int_rate':[2, 3, 2, 2],
+                    'US_GDP_Thousands':[50, 55, 65, 55]},
+                   index = [2001, 2002, 2003, 2004])
+
+df2 = pd.DataFrame({'HPI':[80,85,88,85],
+                    'Int_rate':[2, 3, 2, 2],
+                    'US_GDP_Thousands':[50, 55, 65, 55]},
+                   index = [2005, 2006, 2007, 2008])
+
+df3 = pd.DataFrame({'HPI':[80,85,88,85],
+                    'Int_rate':[2, 3, 2, 2],
+                    'Low_tier_HPI':[50, 52, 50, 53]},
+                   index = [2001, 2002, 2003, 2004])
+
+#concat could leave you with NaN, may not mix properly
+#concat = pd.concat([df1, df2, df3])
+#print(concat)
+
+#appending isn't really what you want to do with data frames
+#data frames aren't really meant to be changed
+#df4 = df1.append(df2)
+#print(df4)
+
+s = pd.Series([80, 2, 50], index = ['HPI','Int_rate','US_GDP_Thousands'])
+df4 = df1.append(s, ignore_index = True)
+
+print(df4)
+"""
+
+#video 6
+"""
+df1 = pd.DataFrame({'HPI':[80,85,88,85],
+                    'Int_rate':[2, 3, 2, 2],
+                    'US_GDP_Thousands':[50, 55, 65, 55]},
+                   index = [2001, 2002, 2003, 2004])
+
+df2 = pd.DataFrame({'HPI':[80,85,88,85],
+                    'Int_rate':[2, 3, 2, 2],
+                    'US_GDP_Thousands':[50, 55, 65, 55]},
+                   index = [2005, 2006, 2007, 2008])
+
+df3 = pd.DataFrame({'HPI':[80,85,88,85],
+                    'Unemployment':[7, 8, 9, 6],
+                    'Low_tier_HPI':[50, 52, 50, 53]},
+                   index = [2001, 2002, 2003, 2004])
+
+#merging is going to give duplicated data
+#similar to SQL merging on a given column
+#print(pd.merge(df1, df2, on=['HPI' , 'Int_rate']))
+
+df1.set_index("HPI", inplace=True)
+df3.set_index("HPI", inplace=True)
+
+joined = df1.join(df3)
+print(joined)
+"""
+#also video 6
+"""
+df1 = pd.DataFrame({
+                    'Int_rate':[2, 3, 2, 2],
+                    'US_GDP_Thousands':[50, 55, 65, 55],
+                    'Year':[2001, 2002, 2003, 2004]
+                    })
+
+df3 = pd.DataFrame({
+                    'Unemployment':[7, 8, 9, 6],
+                    'Low_tier_HPI':[50, 52, 50, 53],
+                    'Year':[2001, 2003, 2004, 2005]})
+
+merged = pd.merge(df1, df3, on = "Year", how="outer")
+merged.set_index("Year", inplace = True)
+print(merged)
+"""
+
