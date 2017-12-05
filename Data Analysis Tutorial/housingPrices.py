@@ -58,7 +58,7 @@ def HPI_Benchmark():
 HPI_data = pd.read_pickle("states.pickle")
 
 #Graphs HPI data against national average
-#benchmark = HPI_Benchmark()
+benchmark = HPI_Benchmark()
 
 # fig = plt.figure()
 # ax1 = plt.subplot2grid((1,1),(0,0))
@@ -68,5 +68,6 @@ HPI_data = pd.read_pickle("states.pickle")
 # plt.legend().remove()
 # plt.show()
 
-HPI_State_Correlation = HPI_data.corr()
-print(HPI_State_Correlation.describe())
+# Correlation, shows min/max/mean/std
+# HPI_State_Correlation = HPI_data.corr()
+# print(HPI_State_Correlation.describe())
