@@ -3,8 +3,8 @@ import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
 from matplotlib import style
-style.use("fivethirtyeight")
 
+style.use("fivethirtyeight")
 
 from credentials import *
 
@@ -42,23 +42,26 @@ def grab_initial_state_data():
 
     main_df.to_pickle("states.pickle")
 
+
 def HPI_Benchmark():
-    df = quandl.get("FMAC/HPI_USA", authtoken = api_key)
+    df = quandl.get("FMAC/HPI_USA", authtoken=api_key)
     df["Value"] = (df["Value"] - df["Value"][0]) / df["Value"][0] * 100.0
 
     return df
+
+
 # default version, pandas version looks better
 # grab_initial_state_data()
 # pickle_in = open("states.pickle", "rb")
 # HPI_data = pickle.load(pickle_in)
 
 
-#grab_initial_state_data()
+# grab_initial_state_data()
 
 HPI_data = pd.read_pickle("states.pickle")
 
-#Graphs HPI data against national average
-benchmark = HPI_Benchmark()
+# Graphs HPI data against national average
+# benchmark = HPI_Benchmark()
 
 # fig = plt.figure()
 # ax1 = plt.subplot2grid((1,1),(0,0))
@@ -71,3 +74,29 @@ benchmark = HPI_Benchmark()
 # Correlation, shows min/max/mean/std
 # HPI_State_Correlation = HPI_data.corr()
 # print(HPI_State_Correlation.describe())
+
+fig = plt.figure()
+ax1 = plt.subplot2grid((2, 1), (0, 0))
+ax2 = plt.subplot2grid((2, 1), (1, 0), sharex=ax1)
+
+# moving average for a year
+HPI_data['AL12MA'] = pd.rolling_mean(HPI_data['AL'], 12)
+HPI_data['AL12STD'] = pd.rolling_std(HPI_data['AL'], 12)
+
+#HPI_data.dropna(inplace=True)
+
+
+# HPI_data[['AL', 'AL12MA']].plot(ax=ax1)
+# HPI_data[['AL12STD']].plot(ax=ax2)
+
+AL_AK_12corr = pd.rolling_corr(HPI_data['AL'], HPI_data['AK'], 12)
+
+HPI_data['AL'].plot(ax=ax1, label='AL HPI')
+HPI_data['AK'].plot(ax=ax1, label='AK HPI')
+
+AL_AK_12corr.plot(ax=ax2, label="AL_AK_12corr")
+
+plt.legend(loc=4)
+plt.show()
+
+gimme=input("")
