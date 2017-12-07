@@ -1,4 +1,4 @@
-#I'm following a tutorial from Youtube for 100DaysOfCode
+# I'm following a tutorial from Youtube for 100DaysOfCode
 # https://www.youtube.com/watch?v=Iqjy9UqKKuo
 
 """
@@ -31,7 +31,6 @@ df.set_index('Day', inplace=True)
 #Arrays not supported natively, numpy array
 #print(np.array(df[['Bounce_Rate', 'Visitors']]))
 """
-
 
 """
 #Video 3
@@ -80,24 +79,22 @@ df.rename(columns={'Greenville_HPI':'36037_HPI'}, inplace=True)
 print(df.head())
 """
 
+# Video 4
+# Append combines rows of one dataframe into another dataframe
 
+# Concat takes a group of 2+ dataframes and combines the dataframes via
+# the rows of the columns. Good for merging multiples with similar data
 
-#Video 4
-#Append combines rows of one dataframe into another dataframe
+# Merge allows for SQL style merging of two dataframes, inner, outer, left, right
 
-#Concat takes a group of 2+ dataframes and combines the dataframes via
-#the rows of the columns. Good for merging multiples with similar data
-
-#Merge allows for SQL style merging of two dataframes, inner, outer, left, right
-
-#Join is similar to merge, join is better when index does matter
+# Join is similar to merge, join is better when index does matter
 
 
 
-#import quandl
-#import pandas as pd
+# import quandl
+# import pandas as pd
 
-#from credentials import *
+# from credentials import *
 
 """
 #df = quandl.get('FMAC/HPI_AL', authtoken=api_key)
@@ -112,7 +109,7 @@ states = pd.read_html('https://en.wikipedia.org/wiki/List_of'
 for abbv in states[0][1][2:]:
     print("FMAC/HPI_"+str(abbv))
 """
-#video 5
+# video 5
 
 """
 df1 = pd.DataFrame({'HPI':[80,85,88,85],
@@ -145,7 +142,7 @@ df4 = df1.append(s, ignore_index = True)
 print(df4)
 """
 
-#video 6
+# video 6
 """
 df1 = pd.DataFrame({'HPI':[80,85,88,85],
                     'Int_rate':[2, 3, 2, 2],
@@ -172,7 +169,7 @@ df3.set_index("HPI", inplace=True)
 joined = df1.join(df3)
 print(joined)
 """
-#also video 6
+# also video 6
 """
 df1 = pd.DataFrame({
                     'Int_rate':[2, 3, 2, 2],
@@ -190,3 +187,29 @@ merged.set_index("Year", inplace = True)
 print(merged)
 """
 
+# video 12
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib import style
+
+style.use('fivethirtyeight')
+
+# 6212 is probably bad data, can possibly remove it
+bridge_height = {
+    'meters': [10.26, 10.31, 10.27, 10.22, 10.23, 6212.42, 10.28, 10.25,
+               10.31]}
+
+df = pd.DataFrame(bridge_height)
+
+df['STD'] = pd.rolling_std(df['meters'], 2)
+
+df_std = df.describe()['meters']['std']
+
+# don't want to delete too much data, can use *2 or 75% std
+df = df [ (df['STD'] < df_std*2) ]
+
+print(df)
+
+df['meters'].plot()
+plt.show()
