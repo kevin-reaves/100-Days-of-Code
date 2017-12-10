@@ -31,6 +31,8 @@ def printWeather(weather):
 weather = pullWeather()
 toTwilio = printWeather(weather)
 
-client = Client(accountSID, authToken)
 
-client.messages.create(body=toTwilio, from_ = twilioNumber, to = cellPhone)
+# must verify each number you text with a trial account 
+client = Client(accountSID, authToken)
+for number in cellPhone:
+    client.messages.create(body=toTwilio, from_ = twilioNumber, to = number)
