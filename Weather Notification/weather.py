@@ -1,4 +1,5 @@
 import pyowm
+from twilio.rest import Client
 from credentials import *
 
 def pullWeather():
@@ -28,4 +29,8 @@ def printWeather(weather):
     return returnStr
 
 weather = pullWeather()
-print(printWeather(weather))
+toTwilio = printWeather(weather)
+
+client = Client(accountSID, authToken)
+
+client.messages.create(body=toTwilio, from_ = twilioNumber, to = cellPhone)
