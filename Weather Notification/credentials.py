@@ -5,8 +5,9 @@ openWeatherMap = ""
 #what your city is called. Troy Alabama is called Troy US
 location = ""
 
+
 # www.twilio.com
 accountSID = ""
 authToken = ""
 twilioNumber = ""
-cellPhone = ""
+cellPhone = []
