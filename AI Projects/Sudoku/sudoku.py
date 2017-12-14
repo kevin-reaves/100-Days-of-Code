@@ -4,20 +4,17 @@ from createBoard import board
 def verifyBoard(board):
     if not board:
         return false
-    if len(board) % 3 != 0:
+    if len(board) != 9:
         return False
-    else:
-        checkLen = len(board)
 
     for row in board:
-        if len(row) != checkLen:
+        if len(row) != 9:
             return False
     return True
 
 def printBoard(board):
-    checkLen = len(board)
 
-    for row in range(len(board)):
+    for row in range(9):
         if row % 3 == 0:
             print("\n")
         print(str(board[row][:3]) + "  " +
