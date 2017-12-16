@@ -56,5 +56,17 @@ def square(num):
 #for i in map(square, ints):
 #    print(i)
 
-for i in map(lambda x: x ** 2, ints):
-    print(i)
+#for i in map(lambda x: x ** 2, ints):
+#    print(i)
+
+def combination(words):
+    # combinations of n groups, order doesn't matter
+    return list(iter.combinations(words, 2))
+
+#print(combination(words))
+
+def permutation(words):
+    #permutations of group, order does matter. Too many causes memory error
+    return list(iter.permutations(["a", "b", "c", "d"]))
+
+print(permutation(words))
