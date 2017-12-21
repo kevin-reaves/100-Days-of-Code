@@ -25,6 +25,7 @@ def formatProblemSet(problemSet):
     problemSet = ''.join(problemSet)
     problemSet = problemSet.replace(" ", "")
 
+    # I never really understood why lambda was useful until this
     problemSet = re.sub("(\d+)(x)", lambda x: \
         str(x.group(1)) + "*x", problemSet)
 
