@@ -52,5 +52,8 @@ def solveProblems(problemSet):
 problemSet = pullFactoring()
 problemSet = formatProblemSet(problemSet)
 solved = solveProblems(problemSet)
-for key, value in solved.items():
-    print(key, "\n", value, "\n")
+
+with open("answers.txt", "wt") as out:
+    for key, value in solved.items():
+        writeStr = str(key) + "\n" +  str(value) + "\n\n"
+        out.write(writeStr)
