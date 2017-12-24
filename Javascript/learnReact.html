@@ -17,6 +17,85 @@
 
     <script type="text/babel">
 
+
+    </script>
+
+</body>
+</html>
+
+
+
+<!--
+
+             //Properties stay the same, states can change
+         //Don't need to tell React to redraw on state change
+        var CheckBox = React.createClass({
+
+            getInitialState: function(){
+                return {checked: false}
+            },
+
+            handleChecked: function(){
+                this.setState({checked: !this.state.checked})
+            },
+
+            render: function(){
+                var message;
+
+                if(this.state.checked){
+                    message = "checked";
+                }
+                else{
+                    message = "unchecked";
+                }
+                return(
+                    <div>
+                        <input type="checkbox" onChange={this.handleChecked} defaultChecked={this.state.checked}/>
+                        <h3>Checkbox is {message}</h3>
+                    </div>
+                );
+            }
+        });
+
+        ReactDOM.render(<CheckBox />, document.getElementById('example'));
+
+
+
+        //Properties stay the same, states can change
+
+        var CheckBox = React.createClass({
+
+            getInitialState(): function(){
+                return {checked: true}
+
+
+            },
+
+            render: function(){
+                var message;
+
+                if(this.state.checked){
+                    message = "checked";
+                }
+                else{
+                    message = "unchecked";
+                }
+                return(
+                    <div>
+                        <input type="checkbox" name="" />
+                        <h3>Checkbox is {msg}</h3>
+                    </div>
+                );
+
+            };
+
+        });
+
+
+
+
+
+    /*
     var Movie = React.createClass({
 
     render : function(){
@@ -28,8 +107,44 @@
         );
     }
     });
+    */
 
 
+    var Comment = React.createClass({
+        edit: function(){
+        alert("editing comment");
+        },
+
+        remove: function(){
+        alert("deleting comment");
+        },
+
+
+
+
+        /*
+        render: function(){
+            return(
+                <div className="commentContainer">
+                    <div className="commentText">{this.props.children}</div>
+                    <button onClick={this.edit}>Edit</button>
+                    <button onClick={this.remove}>Remove</button>
+                </div>
+            );
+        }
+    });
+
+    React.render(
+    <div className="board">
+        <Comment>Some text</Comment>
+        <Comment>Some more text</Comment>
+        <Comment>Is it more? Yes</Comment>
+    </div>, document.getElementById("example"))
+    */
+
+
+
+    /*
     React.render(<div>
         <Movie title="Star Wars E1" genre="SciFi"/>
         <Movie title="Star Wars E2" genre="SciFi"/>
@@ -37,9 +152,8 @@
         <Movie title="Star Wars E4" genre="SciFi"/>
         <Movie title="Star Wars E5" genre="SciFi"/>
         <Movie title="Star Wars E6" genre="SciFi"/>
-    </div>
-    , document.getElementById('example'));
-
+    </div>, document.getElementById('example'));
+    */
 
     //var text = "My name is Kevin and this is a much longer string"
     //Because of babel import, we can write JSX
@@ -74,12 +188,4 @@
     </div>, document.getElementById('example'));
     */
 
-
-
-
-
-
-    </script>
-
-</body>
-</html>
+ -->
