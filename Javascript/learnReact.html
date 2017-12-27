@@ -24,15 +24,15 @@
         },
 
         edit: function(){
-            this.setState({editing: true})
+            this.setState({editing: true});
         },
 
         remove: function(){
-            alert("deleting comment");
+            this.props.deleteComment(this.props.index);
         },
 
         save: function(){
-            var value = this.refs.newText.value;
+            this.props.updateComment(this.refs.newText.value, this.props.index);
 
 
             this.setState({editing: false});
@@ -70,29 +70,47 @@
     var Board = React.createClass({
         getInitialState: function(){
             return{
-                comments:[
-                    "Comment 1",
-                    "Comment 2",
-                    "Comment 3"
-                ]
+                comments: []
             }
         },
+
+        add: function(text){
+            var arr = this.state.comments;
+            arr.push(text);
+            this.setState({comments: arr});
+        },
+
+        removeComment: function(i){
+            var arr = this.state.comments;
+            arr.splice(i, 1);
+            this.setState({comments: arr});
+        },
+
+        updateComment: function(newText, i){
+            var arr = this.state.comments;
+            arr[i] = newText;
+            this.setState({comments: arr});
+        },
+
+
+        eachComment: function(text, i){
+            return(
+                <Comment key={i} index={i} updateComment = {this.updateComment} deleteComment = {this.removeComment}>
+                {text}
+                </Comment>);
+        },     
+
+
         render: function(){
             return(
-                <div className="board">
-                    {
-                        this.state.comments.map(function(text, i){
-                            return(
-                                <div>
-                                <Comment key={i}>{text}</Comment>
-                                <br/><br/>
-                                </div>
-                            );
-                        })
-                    }
+                <div>
+                    <button onClick ={this.add.bind(null, "Bread")} >Add New</button>
+                    <div className="board">
+                        {this.state.comments.map(this.eachComment)}
+                    </div>
                 </div>
             );
-        }
+        },
 
     });
 
