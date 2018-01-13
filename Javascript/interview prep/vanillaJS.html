@@ -5,8 +5,81 @@
 
 <h1 id="demo">JS test</h1>
 
+<script>
+/*
+document.write("1 / 0 = " , 1/0 , "<br>");
+document.write("0 / 0 = " , 0/0, "<br>");
+document.write("Equality === " , 1===1, "<br>");
+document.write("Inequality !== " , 1!==2, "<br>");
+document.write("Double equals does type conversion " , 5=="5", "<br>");
+document.write("Triple equals does not do type conversion " , 5==="5", "<br>");
+document.write("Be careful of weird behavior 13 + !0 " , 13 + !0, "<br>");
+document.write("Be careful of weird behavior '13' + !0 " , '13' + !0, "<br>");
+document.write("Can split strings " + "with + or ",")
+*/
+
+/*
+document.write("thisisastring.charAt(0) -- " , 
+"thisisastring".charAt(0) + "<br>")
+
+document.write("thisisastring.substring(0, 5) -- " , "thisisastring".substring(0,5) + "<br>")
+
+document.write("thisisastring.length  don't use () -- " , "thisisastring".length + "<br>")
+
+document.write("Null - deliberate non value, Undefined -- value that isn't currently defined" + "<br>")
+
+document.write("'Falsy' vs 'Truthy' -- all values except those that are considered falsy evaluate to true in boolean algebra. false, 0, '', null, undefined, NaN are all falsy." + "<br>")
+*/
+
+/*
+document.write("var myVar=5; or myVar=5; both work, the one without var in front is global" + "<br>")
+
+document.write("var myOtherVar; will be set to undefined" + "<br>")
+
+document.write("myVar += 5  and myVar++ are valid" + "<br>")
+*/
+
+/*
+var myArray=["Hello", 45, true];
+myArray.push("Tacos");
+myArray[0] = "GoodBye";
+
+document.write("arrays use [], myArray[1] can hold different types of values ", myArray[1], "<br>");
+
+document.write(myArray.toString(), "<br>");
+myArray.unshift(3)
+document.write("unshift adds as the first element myArray.unshift(3) <br>")
+document.write(myArray.toString(), "<br><br><br>");
 
 
+document.write(myArray.toString(), "<br>");
+myArray.shift()
+document.write("shift removes and returns the first element myArray.shift() <br>")
+document.write(myArray.toString(), "<br><br><br>");
+
+document.write("myArray.push(3) adds 3 as the last element, myArray.pop() removes and returns the last element <br><br><br>")
+
+document.write("myArray.join('-') allows you to join an array with a given seperator ", myArray.join("-"), "<br>");
+
+document.write("myArray.slice(1,4) returns elements without removing, myArray.splice(1,4) will return and remove", "<br>");
+*/
+
+/*
+document.write("objects are similar to python dictionaries myObj = {key: value} <br><br><br>")
+
+var myObj = {"one": 1, "two": 2}
+
+document.write(myObj.one, "  ---  ", myObj["one"],  " myObj.one and myObj['one'] both work  <br><br><br>")
+
+myObj["three"] = 3;
+document.write(myObj["three"], " can add rows or change rows after they've been added", "<br><br><br>")
+
+document.write(myObj["four"], " since myObj['four'] isn't defined, we'll get undefined", "<br><br><br>")
+*/
+
+document.write("left off at logic and control structures <br>");
+</script>
+https://learnxinyminutes.com/docs/javascript/
 
 <!--
 <button type="button" onclick='document.getElementById("demo").innerHTML = "Hello JavaScript!"'>Change JS</button>
