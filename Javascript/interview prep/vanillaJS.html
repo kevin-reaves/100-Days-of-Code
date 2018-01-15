@@ -206,6 +206,61 @@ document.write(myNewObj.myNumber);
 //Unlike most OO languages, JS has no instances created from a class, instead JS combines instantiation and inheritance into a prototype
 
 //left off at prototypes
+
+/*
+var myObj = {
+	myString: "Hello World"
+};
+
+var myPrototype = {
+	meaningOfLife: 42,
+	myFunc: function(){
+		return this.myString.toLowerCase();
+	}
+};
+
+myObj.__proto__ = myPrototype;
+document.write(myObj.meaningOfLife, "<br>");
+document.write(myObj.myFunc(), "<br>");
+
+//each object stores a reference to its prototype, altering the prototype makes changes take effect everywhere
+
+myPrototype.meaningOfLife = 43;
+document.write(myObj.meaningOfLife);
+*/
+
+/*
+var myObj = [1, 10, 100, "one", "ten", "one hundred"];
+
+for (var x in myObj){
+	document.write(myObj[x], "<br>");
+}
+*/
+
+/*
+var myPrototype = {
+	meaningOfLife: 42,
+	myFunc: function(){
+		return this.myString.toLowerCase();
+	}
+};
+
+var myObj = Object.create(myPrototype);
+document.write(myObj.meaningOfLife);
+*/
+
+/*
+var myNumber = 12;
+var myNumberObj = new Number(12);
+document.write(myNumber == myNumberObj);
+*/
+
+//Built in types have constructors that create equivalent wrapper objects
+
+//Values are similar, not equivalent. == not ===
+
+
+
 </script>
 
 <!--
