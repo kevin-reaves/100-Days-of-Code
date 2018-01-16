@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+/*
+typeof bar === "object"
+
+null can also be considered an object, will return true with null
+
+(bar !== null && (typeof bar === "object")
+would be a better way, can check if bar is a function as well
+*/
+
+/*
+(function()
+{
+	var a = b = 3;
+})();
+the (); after the definition is a self invoking function
+
+the above is shorthand for b = 3; var a = b;
+*/
+
+/*
+strict mode helps out with catching common issues
+
+catches common bloopers, throwing errows
+throws errors when a global object is accessed
+disables features that are considered to be poorly thought out
+
+can use strict on the whole file or on a single function
+*/
+
+/*
+Why would you wrap the entire javascript source file in a function block?
+
+This creates a closure around the contents of the file, providing several benefits. One of these benefits is a private namespace (avoids name conflicts)
+*/
+
+/*
+These functions won't return the same thing, foo2 actually returns undefined. JS adds semicolons at linebreaks, so foo2 translates to return; { bar: "hello"}
+
+function foo1()
+{
+  return {
+      bar: "hello"
+  };
+}
+
+function foo2()
+{
+  return
+  {
+      bar: "hello"
+  };
+}
+*/
+
+/*
+NaN - not a number, caused by "abc"/4 or 4/0, other things
+
+typeof NaN === "number" -- true
+NaN === NaN -- false, NaN === anything is false
+
+a few ways to check if a number is NaN
+isNaN() -- can potentially be unreliable
+value !== value -- would only be true for NaN
+Number.isNaN() -- only available for newer versions of JS
+*/
+
+/*
+0.1 + 0.2 == 0.3 -- false
+function areTheNumbersAlmostEqual(num1, num2) {
+	return Math.abs( num1 - num2 ) < Number.EPSILON;
+}
+*/
+
+/*
+
+*/
+
+</body>
+</html>
