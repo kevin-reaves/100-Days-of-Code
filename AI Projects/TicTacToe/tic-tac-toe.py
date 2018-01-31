@@ -1,12 +1,6 @@
 """
-Tic Tac Toe solver using minimax. 
+Tic Tac Toe solver using minimax. Starting with invent with python's game, making improvements once I have a working board
 
-Starting with invent with python's game, 
-making improvements once I have a working board.
-
-
-I want to move to an oop model, clean up some
-functions, and use minimax instead of random
 
 https://inventwithpython.com/invent4thed/chapter10.html
 """
@@ -29,9 +23,9 @@ def main():
             print("Please choose either X or O next time.")
             
         print("You chose", playerSymbol)
-        return playerSymbol
+        return playerSymbol, cpuSymbol
 
-    def printBoard(explain=False):
+    def printBoard(board, explain=False):
         if explain:
             print("This is the way the columns are named.")
             print("7 8 9 \n4 5 6 \n1 2 3\n")
@@ -41,6 +35,7 @@ def main():
         print(board[4] + '|' + board[5] + '|' + board[6])
         print('-+-+-')
         print(board[1] + '|' + board[2] + '|' + board[3])
+        print("\n\n")
 
     def goesFirst():
         #if 0 cpu goes first, if 1 player goes first
@@ -111,7 +106,7 @@ def main():
         if isSpaceFree(board, 5):
             return 5
         #corners
-        move = chooseRamdomMove(board, [1, 3, 7, 9])
+        move = chooseRandomMove(board, [1, 3, 7, 9])
         if move != None:
             return move
         #sides
@@ -122,22 +117,55 @@ def main():
         for i in range(1, 10):
             if isSpaceFree(board, i):
                 return False
-            else:
-                return True
+        else:
+            return True
 
 
     while True:
-        playerSymbol = ""
-        cpuSymbol = ""
-        board = [" "] * 10
+        myBoard = [" "] * 10
         
         symbol = input("Would you like to be X or O?  ")
-        chooseXY(symbol)
+        playerSymbol, cpuSymbol = chooseXY(symbol)
         #printBoard(True) tells the user the names of the slots
-        printBoard(True)
+        printBoard(myBoard, True)
 
         turn = goesFirst()
         print(turn, "will go first")
+        playGame = True
+
+        while playGame:
+            if turn == "player":
+                printBoard(myBoard)
+                move = getPlayerMove(myBoard)
+                makeMove(myBoard, playerSymbol, move)
+                if isWinner(myBoard, playerSymbol):
+                    print("You win")
+                    break
+                else:
+                    if isBoardFull(myBoard):
+                        printBoard(myBoard)
+                        print("This one's a tie")
+                        break
+                    else:
+                        printBoard(myBoard)
+                        turn = "cpu"
+            else:
+                move = getComputerMove(myBoard, cpuSymbol)
+                makeMove(myBoard, cpuSymbol, move)
+
+                if isWinner(myBoard, cpuSymbol):
+                    printBoard(myBoard)
+                    print("The computer wins")
+                    break
+                else:
+                    if isBoardFull(myBoard):
+                        printBoard(myBoard)
+                        print("This one's a tie")
+                        break
+                    else:
+                        turn = "player"
+                    
+            
                 
 
     
