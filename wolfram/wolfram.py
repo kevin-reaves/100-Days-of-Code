@@ -1,3 +1,5 @@
+#https://medium.com/@salisuwy/build-an-ai-assistant-with-wolfram-alpha-and-wikipedia-in-python-d9bc8ac838fe
+
 from credentials import *
 import wolframalpha
 import xml.etree.ElementTree as ET
