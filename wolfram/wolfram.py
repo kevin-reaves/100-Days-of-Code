@@ -6,27 +6,27 @@ import xml.etree.ElementTree as ET
 
 client = wolframalpha.Client(app_id)
 
-#print(app_id)
-#question = input("Ask Wolfram Alpha a question ")
-question = "who is the us president"
+def resolveListOrDict(variable):
+  if isinstance(variable, list):
+    return variable[0]["plaintext"]
+  else:
+    return variable["plaintext"]
+
+def removeBrackets(variable):
+  return variable.split("(")[0]
+
+question = "who is the world's fastest man"
 if question:
     result = client.query(question)
 else:
     question = input("Please try that again ")
 
-for item in result:
-    print(item)
-##root = ET.fromstring(result)
-##error = root.get("error")
-##success = root.get("success")
-##numpods = root.get("numpods")
-##answer = ""
-##
-##print(success, numpods)
-##if success and int(numpods) > 0:
-##    for plaintext in root.iter("plaintext"):
-##        answer += plaintext.text
-##    print(answer)
-##elif error:
-##    print("That query threw an error")
-##
+if not result["@success"]:
+    print("Please try again")
+else:
+    try:
+        pod0 = result['pod'][0]['subpod']['plaintext']
+        pod1 = result['pod'][1]['subpod']['plaintext']
+        print(pod0, pod1)
+    except:
+        print("Something went wrong")
