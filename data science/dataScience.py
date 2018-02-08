@@ -2,7 +2,6 @@ import csv
 import numpy
 
 #https://www.dataquest.io/blog/numpy-tutorial-python/
-#at 1-Dimensional NumPy Arrays
 
 """
 alcoholOverNine = []
@@ -168,6 +167,6 @@ B: (49,49)
 #print(equalsTen)
 
 #print(wines.shape)
-wines = wines[1,:].reshape((2,6))
+#wines = wines[1,:].reshape((2,6))
 #print(wines.shape)
-print(wines)
+#print(wines)
