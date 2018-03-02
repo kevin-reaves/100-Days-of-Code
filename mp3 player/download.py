@@ -15,5 +15,5 @@ print("Title: " + video.title)
 print("Author: " + video.author)
 print("Duration: " + video.duration)
 
-best = video.getbest(preftype="mp4", quiet=True)
-best.download()
+best = video.getbest(preftype="mp4")
+best.download(quiet=True)
